@@ -1,0 +1,119 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block content %}
+<body>
+    <header>
+        <div class="section-wrapp">
+            <div class="container educenter">
+                <div class="main-header_top_wrapper">
+                    <div class="main-header_top-right">
+                        <a href="/" class="main-logo">
+                            <img src="{% static "./assets/img/logo.svg" %}" alt="">
+                        </a>
+                        <h1 class="main-request_username">Ilyosbek</h1>
+                        <p class="main-current_location">
+                            <i class="fa-regular fa-location-dot"></i>
+                            <span class="main-current_id_location"></span>
+                        </p>
+                    </div>
+                    <div class="main-header_top-left">
+                        <img src="{% static "./assets/img/sam-user-pfp.png" %}" alt="">
+                    </div>
+                </div>
+
+                <div class="main-header_top_block_wrapper">
+                    <div class="main-header_top-search">
+                        <form action="" class="main-search_form">
+                            <input type="text" class="main-search_input" placeholder="Ish/Ishchi qidiring...">
+                            <button type="submit" class="main-search_btn">
+                                <i class="fa-regular fa-search"></i>
+                            </button>
+                        </form>
+                    </div>
+                    <div class="main-header_top-filter">
+                        <i class="fa-solid fa-bars-sort"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="section-wrapp">
+            <div class="container">
+                <div class="main-edu_centers">
+                    <div class="main-block_header">
+                        <h1 class="main-block_heading">O’quv markazlar</h1>
+                        <a href="/" class="main-block_link">
+                            Hammasi
+                        </a>
+                    </div>
+                    <div class="main-educenter-scroll">
+                        <div class="main-educenter_loop">
+                            <a href="./educenter.html" class="main-educenter-item">
+                                <img src="{% static "./assets/img/edu centers/najot talim.png" %}" alt="">
+                                <p class="main-educenter-item_name">Najot Ta'lim</p>
+                                <span class="main-educenter-item_type">O'quv markazi</span>
+                            </a>
+
+                            <a href="./educenter.html" class="main-educenter-item">
+                                <img src="{% static './assets/img/edu centers/mohirdev.png' %}" alt="">
+                                <p class="main-educenter-item_name">MohirDev</p>
+                                <span class="main-educenter-item_type">O’quv akademiya</span>
+                            </a>
+
+                            <a href="./educenter.html" class="main-educenter-item">
+                                <img src="{% static './assets/img/edu centers/robocode.png' %}" alt="">
+                                <p class="main-educenter-item_name">Robocode</p>
+                                <span class="main-educenter-item_type">O'quv markazi</span>
+                            </a>
+
+                            <a href="./educenter.html" class="main-educenter-item">
+                                <img src="{% static './assets/img/edu centers/astrum.png' %}" alt="">
+                                <p class="main-educenter-item_name">Astrum</p>
+                                <span class="main-educenter-item_type">O'quv akademiya</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="main-vacancies">
+                    <div class="main-block_header">
+                        <h1 class="main-block_heading">Vakansiyalar</h1>
+                        <a href="/" class="main-block_link">
+                            Hammasi
+                        </a>
+                    </div>
+
+                    <div class="vacancies_loop">
+                        {% for vacancy in vacancy_list %}
+                        <div class="vacancies-item" data-aos="fade-up">
+                            <div class="vacancy-item_right">
+                                <img src="{{ vacancy.company.logo.url }}" alt="{{ vacancy.company.name }} logo">
+                            </div>
+                    
+                            <div class="vacancy-item_left">
+                                <h1 class="vacancy-company_name">{{ vacancy.company.name }}</h1>
+                                <p class="vacancy-title vacancy-info">{{ vacancy.name }}</p>
+                         
+                                <p class="vacancy-experience vacancy-info">Tajriba: {{ vacancy.experience_years }} yil</p>
+                                <p class="vacancy-age vacancy-info">Yoshi: {{ vacancy.minimum_age }}+</p>
+                                <p class="vacancy-tech vacancy-info">
+                                    Texnologiyalar: 
+                                    {% for tech in vacancy.requirement_tech.all %}
+                                        {{ tech.name }}{% if not forloop.last %}, {% endif %}
+                                    {% endfor %}
+                                </p>
+                                <p class="vacancy-link vacancy-info"><a href="">Ko'rish</a></p>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+{% endblock content %}
